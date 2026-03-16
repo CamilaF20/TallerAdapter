@@ -1,0 +1,27 @@
+import { SistemaOrdenes } from "../src/core/SistemaOrdenes";
+import { AdaptadorPago } from "../src/adapters/AdaptadorPago";
+import { AdaptadorSegundoProveedor } from "../src/adapters/AdaptadorSegundoProovedor";
+
+describe("Paso 6 - Cambio de proveedor", () => {
+
+  test("El sistema debe funcionar con diferentes proveedores", () => {
+
+    const sistema1 = new SistemaOrdenes(
+      new AdaptadorPago()
+    );
+
+    const sistema2 = new SistemaOrdenes(
+      new AdaptadorSegundoProveedor()
+    );
+
+    const orden1 = sistema1.crearOrden("cliente6", 100);
+
+    const orden2 = sistema2.crearOrden("cliente7", 200);
+
+    expect(orden1.ordenCreada).toBe(true);
+
+    expect(orden2.ordenCreada).toBe(true);
+
+  });
+
+});
